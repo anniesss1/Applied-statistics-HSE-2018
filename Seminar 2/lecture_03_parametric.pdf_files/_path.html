@@ -1,0 +1,199 @@
+
+<!-- saved from url=(0057)https://marketing.dropbox.com/s/%3Atkey/%2Apath?referrer= -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <!--[if (gte IE 9) ]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <![endif]-->
+    <title>Dropbox</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src https: &#39;unsafe-inline&#39; &#39;unsafe-eval&#39;; ">
+    </head>
+<body>
+<script async="" src="./fbevents.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script><script async="" src="./gtm.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script><script>
+    (function(){
+        // Enable debugging via localStorage.
+        var debug_enabled = false;
+        if (window.localStorage && window.localStorage.getItem('marketing_tracker_debug')) {
+            debug_enabled = true;
+        }
+
+        /**
+         * Grab referrer from query params and attempt to set on document. If we have a correct
+         * referrer reference then setup the trackers, otherwise, we need to reload.
+         */
+        var ref_match = RegExp('[?&]referrer=([^&]*)').exec(window.location.search);
+        var fakeref = ref_match ? decodeURIComponent(ref_match[1]) : "";
+        try {
+            if ('Object' in window && 'defineProperty' in Object){
+                Object.defineProperty(document,'referrer',{'get':function(){ return fakeref;}});
+            } else {
+                window.document.__defineGetter__('referrer', function () { return fakeref;});
+            }
+        } catch(e){}
+
+        // If we couldn't override the referrer, then replace the location and reload.
+        if (document.referrer !== fakeref && document.referrer !== "") {
+            location.replace(location.href);
+        } else {
+            setupTrackers();
+        }
+
+        /**
+         * Listens for postMessages and sets up the trackers.
+         */
+        function setupTrackers () {
+            // GTM dataLayer and status.
+            window.dataLayer = [];
+            window.gtmAdded = false;
+
+            // Tealium event queue and interval.
+            window.tealiumQueue = [];
+            window.tealiumLoading = false;
+
+            // Listen for messages from marketing_tracker.ts.
+            window.addEventListener('message', function(event){
+                debug('postMessage received', event);
+
+                var isTrustedOrigin = (
+                    event.origin.match(new RegExp('^https://www\.dropbox\.com$')) ||
+                    event.origin.match(new RegExp('^https://paper\.dropbox\.com$'))
+                );
+
+                if (isTrustedOrigin) {
+                    var dataLayer = event.data || {};
+                    var config = {};
+
+                    // If config was passed through, strip it from the dataLayer.
+                    if (dataLayer._config) {
+                        config = dataLayer._config;
+                        delete dataLayer._config;
+                    }
+
+                    // Debug log the dataLayer and config.
+                    debug('Config', config);
+                    debug('dataLayer', dataLayer);
+
+                    // Let each tag manager handle the event.
+                    handleGoogleTagManager(deepClone(dataLayer), config);
+                    handleTealium(deepClone(dataLayer), config);
+                } else {
+                    debug('Untrusted origin, no trackers activated');
+                }
+            });
+        }
+
+        /**
+         * Load Google Tag Manager and push data to it.
+         */
+        function handleGoogleTagManager (dataLayer, config) {
+            var disabled = config.gtm_disabled !== undefined ? config.gtm_disabled : false;
+            var gtmId = config.gtm_id || 'GTM-K8WT2R';
+
+            // If GTM is disabled, bail out.
+            if (disabled) {
+                return;
+            }
+
+            // Push data to gtm and load if needed.
+            window.dataLayer.push(dataLayer);
+            debug('GTM - dataLayer.push()');
+            if (!window.gtmAdded) {
+                window.gtmAdded = true;
+                debug('GTM - loading script');
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer',gtmId);
+            }
+        }
+
+        /**
+         * Load Tealium and push data to it. Since Tealium doesn't queue data the same way that
+         * GTM does, we need to setup our own queue and process it after Tealium's API
+         * has finished loading.
+         */
+        function handleTealium (dataLayer, config) {
+            var enabled = config.tealium_enabled !== undefined ? config.tealium_enabled : false;
+            var profile = config.tealium_profile || 'main';
+            var env = config.tealium_env || 'prod';
+
+            // If Tealium is not enabled, bail out.
+            if (!enabled) {
+                return;
+            }
+
+            // Temporary hack to set proper tealium_event.
+            // TODO (blink): Remove this once we land the metaserver change.
+            if (dataLayer.tealium_event === 'metaserver' && dataLayer.event) {
+                dataLayer.tealium_event = dataLayer.event;
+            }
+
+            // Load tealium script and set page data, or queue the event if this is not the first
+            // postMessage received.
+            if (!window.utag) {
+                if (!window.tealiumLoading) {
+                    window.tealiumLoading = true;
+
+                    // Set the page view data and load the utag script.
+                    debug('Tealium - setting utag_data and loading script');
+                    window.utag_data = dataLayer;
+                    (function(a,b,c,d){
+                        a='//tags.tiqcdn.com/utag/dropbox/'+ profile + '/' + env + '/utag.js';
+                        b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+                        a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+                    })();
+
+                    // Wait until Tealium is loaded, then drain the queue.
+                    (function checkWithBackoff(delay) {
+                        setTimeout(function () {
+                            debug('Tealium - checking for window.utag', !!window.utag);
+                            if (!!window.utag) {
+                                window.tealiumLoading = false;
+                                window.tealiumQueue.forEach(function (item) {
+                                    debug('Tealium - utag.link() for queued item', item);
+                                    window.utag.link(item);
+                                });
+                                window.tealiumQueue = [];
+                            } else {
+                                checkWithBackoff(delay * 1.15);
+                            }
+                        }, delay);
+                    })(100);
+                } else {
+                    debug('Tealium - adding data to queue');
+                    window.tealiumQueue.push(dataLayer);
+                }
+
+            } else {
+                debug('Tealium - utag.link()');
+                window.utag.link(dataLayer);
+            }
+        }
+
+        /**
+         * Helper to do 'debug' logging (only visible if you are showing 'verbose' console logs).
+         */
+        function debug (msg, data) {
+            if (console.debug && debug_enabled) {
+                if (data) {
+                    console.debug('Marketing Tracker: ' + msg, data);
+                } else {
+                    console.debug('Marketing Tracker: ' + msg);
+                }
+            }
+        }
+
+        /**
+         * Helper to deep clone a simple object (for dataLayer).
+         */
+        function deepClone (obj) {
+            return JSON.parse(JSON.stringify(obj));
+        }
+    })();
+</script>
+
+
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","442728829472826");fbq("set","agent","tmgoogletagmanager","442728829472826");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=442728829472826&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">window.gtm_tlm={Google_Analytics:!0,Marketo:!0,LinkedIn_Insight_Tag:!0,Sizmek_VersaTag:!0,Bing_Ads_Universal_Event_Tracking:!0,DBX_Pro_Conversion:!0,Conversion_Linker_Tag:!0,MCC_DfB_Visited_Try_or_Buy:!0,MCC_DfB_Trial:!0,MCC_DfB_Purchase:!0,PK4_Display_Professional_Trial_Sign_Up:!0,PK4_Display_Professional_Product_Purchase:!0,PK4_Team:!0,Acquisition_All_Pages:!0,Elite_Social_DfB_Trial_Starts:!0};</script></body></html>
