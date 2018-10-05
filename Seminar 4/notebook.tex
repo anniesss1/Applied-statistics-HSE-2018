@@ -1,0 +1,1189 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{04\_natural\_gradient\_unfilled\_????\_???}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Natural gradient}\label{natural-gradient}
+
+\paragraph{Краткий
+синопсис}\label{ux43aux440ux430ux442ux43aux438ux439-ux441ux438ux43dux43eux43fux441ux438ux441}
+
+В этой части мы рассмотрим тему, которая находится на границе тем о
+матрице Фишера и KL-дивергенции. Будем использовать оптимизировать по
+метрике KL (натуральные градиенты).
+
+Для начала, вспомним, что такое:
+
+\begin{itemize}
+\tightlist
+\item
+  MLE 
+\item
+  Информация Фишера 
+\item
+  Градиентный спуск
+\end{itemize}
+
+\textless{}https://wiseodd.github.io/techblog/2018/03/14/natural-gradient/
+\textgreater{}
+
+    \subsubsection{Maximum likelihood
+оптимизация}\label{maximum-likelihood-ux43eux43fux442ux438ux43cux438ux437ux430ux446ux438ux44f}
+
+Очень часто в машинном обучении и статистике возникает задача когда есть
+данные \(X\), некоторое параметрическое распределение \(p(x | \theta)\)
+и желание найти параметры \(\theta\).
+
+Самые лучшие параметры это те которые минимизируют функцию
+правдоподобия: \(\mathcal{L}(X, \theta)\), во многих случаях это можно
+сделать аналитически(почти для всех известных нам именных
+распределений).
+
+В случае если нет возможности посчитать аналитически MLE-оценки
+приходится обращаться к итеративным методам оптимизации. Один из самых
+популярных способов это градиентный спуск, который, формально решает
+следующую задачу:
+
+\[d \theta = \arg \max \mathcal{L}(X|\theta + d \theta), s.t. ||d\theta|| < \epsilon\]
+
+И результатом решения этой задачи является:
+
+\[d\theta = \frac{\nabla_\theta \mathcal{L}}{||\nabla_\theta \mathcal{L}||} \epsilon\]
+
+    Оптимально ли это?
+
+Мы ограничиваем наш шаг \(||d\theta||\) сферой радиусом \(\epsilon\) в
+евклидовом пространстве, но это не особо разумно неразумно.
+
+К примеру, сравним два распределения с \(\mu_1 = -2, \mu_2 = 2\), а
+дисперсия фиксирована и равна \(\sigma_1 = \sigma_2 = 1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{entropy}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+        \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline} \PY{c+c1}{\PYZsh{} добавить}
+        
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    И сравним два распределения с \(\mu_1 = -2, \mu_2 = 2\), c
+\(\sigma_1 = \sigma_2 = 5\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    По евклидовой метрике растояние между ними одинаково, но на второй
+картинке распределения более похожие друг на друга, чем на первой.
+
+Это можно увидеть, если вместо евклидовой метрики смотреть на растояние
+Кульбака-Лейблера между ними:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{entropy}\PY{p}{(}\PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{entropy}\PY{p}{(}\PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (0.24465034406492298, 7.9999999999999805)
+\end{Verbatim}
+            
+    По этой причине мы бы хотели научиться решать следующую задачу:
+
+\[d \theta = \arg \max \mathcal{L}(X|\theta + d \theta), s.t. KL\left( p(x| \theta) || p(x| \theta + d \theta) \right) < \epsilon\]
+
+То есть мы хотели бы на каждом шаге оптимизации делать шаг на
+\(\epsilon\) по метрике KL, а не по метрике \(L_2\).
+
+В этом семинаре мы покажем как это делать.
+
+Наши шаги:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Мы вспомним как выглядит 2D-гауссиана и посчитаем для неё
+  log-likelihood и градиент по log-likelihood.
+\item
+  Это нам понадобится для подсчета натурального градиента в KL в
+\end{enumerate}
+
+    \subsubsection{Генерация
+данных}\label{ux433ux435ux43dux435ux440ux430ux446ux438ux44f-ux434ux430ux43dux43dux44bux445}
+
+Сгенерируем данные из распределения 2D-гауссианы с 5 параметрами:
+\(\vec{\mu} = [2, -6]\),
+\(\Sigma = \begin{pmatrix} 5 & 0.8\\ 0.8 & 2 \end{pmatrix}\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{true\PYZus{}parameters} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{,} 
+                              \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{} где на диагонали дисперсии компонент вектора,а внедиагональные элементы — ковариации между компонентами.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{X\PYZus{}decart} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2000}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}decart}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} <matplotlib.collections.PathCollection at 0x1d8915d3390>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Ввод функция для расчёта log-likelihood и
+pdf.}\label{ux432ux432ux43eux434-ux444ux443ux43dux43aux446ux438ux44f-ux434ux43bux44f-ux440ux430ux441ux447ux451ux442ux430-log-likelihood-ux438-pdf.}
+
+Первым делом, вспомним как выглядят плотность и log-likelihood для
+2D-гаусса.
+
+\[p(x|\mu, \Sigma) = \frac{1}{2 \pi |\Sigma|^{1/2}} \exp\left( - \frac{1}{2} (\vec{x} - \vec{\mu})^T \Sigma^{-1} (\vec{x} - \vec{\mu}) \right)\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} np.linalg.det\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} np.linalg.inv\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{norm\PYZus{}2d\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{mean}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{cov}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    pdf нормального распределения в точке x}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{assert} \PY{n}{x}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{mean}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mean}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}
+             \PY{n}{ll}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{cov}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ll}\PY{o}{*}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{cov}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ll}
+         
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}pdf}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{2.}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{6.}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.052021420545533555}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}8}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}pdf}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.013538015908347703}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}8}
+\end{Verbatim}
+
+
+    Log Likelihood Equation:
+
+\begin{figure}
+\centering
+\includegraphics{https://cdn-images-1.medium.com/max/1200/1*H4hW2Haijx9lMdIQJWP32w.png}
+\caption{LLE}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{norm\PYZus{}2d\PYZus{}ll}\PY{p}{(}\PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{mean}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{cov}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    log\PYZhy{}pdf нормального распределения в точке x}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{assert} \PY{n}{x}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{mean}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mean}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}
+             \PY{n}{ll}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{cov}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{ll}\PY{o}{\PYZhy{}}\PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{cov}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ll}
+         
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}ll}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{40.}\PY{p}{,} \PY{l+m+mf}{33.3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{745.0185997116541}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{mean}\PY{p}{,} \PY{n}{cov}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ll} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{norm\PYZus{}2d\PYZus{}ll}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mean}\PY{p}{,} \PY{n}{cov}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ll}
+\end{Verbatim}
+
+
+    \subsubsection{Градиент 2D-нормального
+распределения}\label{ux433ux440ux430ux434ux438ux435ux43dux442-2d-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}
+
+Мы хотим посчитать
+\$\frac{\partial \log p(\vec{x}|\vec{\theta})}{\partial \vec{\theta}}
+\$, где p это наша плотность вероятности, а \(\theta\) - параметры
+распределения(среднее и матрица ковариации).
+
+Подсказки:
+
+\[\frac{\partial \log |X|}{\partial X} = (X^{-1})^T = X^{-T}\]
+
+\[\frac{\partial \log a^T X b}{\partial X} = -X^{-T} a b^T X^{-1}\]
+
+Книга по всевозможным матричным вычислениям for your interest:
+http://www.math.uwaterloo.ca/\textasciitilde{}hwolkowi//matrixcookbook.pdf
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} np.allclose\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} np.outer\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{(}\PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{mean}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{cov}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Градиент от log\PYZhy{}pdf по mu и cov}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{assert} \PY{n}{x}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{mean}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{1}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mean}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}
+             \PY{n}{cov\PYZus{}inv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{cov}\PY{p}{)}
+             \PY{n}{grad\PYZus{}mean} \PY{o}{=} \PY{n}{cov\PYZus{}inv}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)}
+             \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{cov\PYZus{}inv} \PY{o}{\PYZhy{}} \PY{n}{cov\PYZus{}inv}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{outer}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{,} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{cov\PYZus{}inv}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+             \PY{k}{return} \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov}
+         
+         \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{2.}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{6.}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{grad\PYZus{}cov}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.10683761}\PY{p}{,}  \PY{l+m+mf}{0.04273504}\PY{p}{]}\PY{p}{,}\PY{p}{[} \PY{l+m+mf}{0.04273504}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.26709402}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{true\PYZus{}parameters}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.38461538}\PY{p}{,}  \PY{l+m+mf}{1.15384615}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{grad\PYZus{}cov}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.03287311}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.17915845}\PY{p}{]}\PY{p}{,}                                                                                                    \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.17915845}\PY{p}{,}  \PY{l+m+mf}{0.39858646}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{KL
+дивергенция}\label{kl-ux434ux438ux432ux435ux440ux433ux435ux43dux446ux438ux44f}
+
+KL-дивергенция выглядит следующим образом:
+
+\[KL\left(p(x|\theta)||p(x|\theta')\right) = \int p(x|\theta) \log \frac{p(x|\theta)}{p(x|\theta')} dx \]
+
+    А теперь зададимся вопросом: как нам оптимизировать параметры так чтобы
+спускаться с постоянной скоростью по метрике KL?
+
+Для этого расмотрим
+\(\mathrm{KL}\left[ p_{\theta} || p_{\theta + d \theta} \right]\) -
+KL-дивергенцию от двух очень близких друг к другу распределений и
+разложим эту функцию по Тейлору при \(d \theta \rightarrow 0\):
+
+\[
+\mathrm{KL}\left[ p_{\theta} || p_{\theta + d \theta} \right] \approx \dots
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} np.linalg.det\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} np.trace\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,} 
+                              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{k}{def} \PY{n+nf}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{,} \PY{n}{parameters\PYZus{}2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{res} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{+} 
+                   \PY{p}{(}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{res} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{,} \PY{n}{parameters\PYZus{}2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{kl} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{kl} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{p}{)}
+             \PY{n}{kl} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{p}{)}
+             \PY{n}{kl} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}
+                 \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{parameters\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{parameters\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{p}{)}
+             \PY{n}{kl} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{2}
+             \PY{n}{kl} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{2}
+             \PY{k}{return} \PY{n}{kl}
+         
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{11.560530337552443}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}6}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{21.38177735475525}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}6}
+\end{Verbatim}
+
+
+    \subsubsection{Связь KL-дивергенции и матрицы
+Фишера}\label{ux441ux432ux44fux437ux44c-kl-ux434ux438ux432ux435ux440ux433ux435ux43dux446ux438ux438-ux438-ux43cux430ux442ux440ux438ux446ux44b-ux444ux438ux448ux435ux440ux430}
+
+Гессиан log-likelihood функции это одна из форм записи матрицы Фишера:
+
+\[I_n = E \left[ \mathrm{H}_{\log p(x | \theta)} \right]\]
+
+Таким образом, матрица Фишера, гессиан log-likelihood функции и гессиан
+KL-дивергенции это одно и тоже.
+
+\subsubsection{Расчёт матрицы
+Фишера}\label{ux440ux430ux441ux447ux451ux442-ux43cux430ux442ux440ux438ux446ux44b-ux444ux438ux448ux435ux440ux430}
+
+Более удобный способ расчёта матрицы Фишера:
+
+\[I_n = E\left[ \left( \frac{\partial \log p(\vec{x}|\vec{\theta})}{\partial \vec{\theta}} \right) 
+\left( \frac{\partial \log p(\vec{x}|\vec{\theta})}{\partial \vec{\theta}}\right)^T  \right]\]
+
+Производную мы посчитали выше. А как нам посчитать матожидание?
+
+Усреднение по элементам выборки есть приближение среднего,поэтому самый
+простой способ это посчитать матрицу Фишера для каждого элемента нашей
+выборки и усреднить.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{np}\PY{o}{/}ravel\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Object `ravel` not found.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} (array([ 3.,  4.,  6.,  7.,  2.,  2.,  2.,  2.,  3., 55.,  6.]),
+          [3.0, 4, 6, 7, 2, 2, 2, 2, 3, 55, 6])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} np.concatenate\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} np.vstack\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} np.cov\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{typing} \PY{k}{import} \PY{n}{Callable}\PY{p}{,} \PY{n}{Union}
+         \PY{k}{def} \PY{n+nf}{empirical\PYZus{}fisher}\PY{p}{(}\PY{n}{grad\PYZus{}func}\PY{p}{:} \PY{n}{Callable}\PY{p}{,} \PY{n}{X}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{parameters}\PY{p}{:} \PY{n+nb}{dict}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{Union}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{]}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Функция принимает на вход матрицу X размера N x 2, функцию расчёта градиента}
+         \PY{l+s+sd}{    для среднего и ковариации и параметры нормального распределения.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    На выход возвращается усреднённый по выборке градиент и матрица Фишнера.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{grads} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Посчитать градиент для сэмпла}
+                 \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{n}{grad\PYZus{}func}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} \PYZdq{}Вытянуть\PYZdq{} градиент в один вектор не забыв про условие симметричности матрицы ковариации}
+                 \PY{n}{grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{grads}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{grad}\PY{p}{)}
+             \PY{n}{grads} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{n}{grads}\PY{p}{)}
+             \PY{n}{fisher} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{grads}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{k}{return} \PY{n}{grads}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{fisher}
+         
+         \PY{n}{grad}\PY{p}{,} \PY{n}{fisher} \PY{o}{=} \PY{n}{empirical\PYZus{}fisher}\PY{p}{(}\PY{n}{grad\PYZus{}func}\PY{o}{=}\PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{1.7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.7}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{parameters}\PY{o}{=}\PY{n}{true\PYZus{}parameters}\PY{p}{)}
+         
+         
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{grad}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.6994302} \PY{p}{,}  \PY{l+m+mf}{2.99643875}\PY{p}{,}  \PY{l+m+mf}{0.17642207}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.25459919}\PY{p}{,}  \PY{l+m+mf}{4.61902881}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{fisher}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[} \PY{l+m+mf}{0.11597511}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.36640429}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.07877717}\PY{p}{,}  \PY{l+m+mf}{0.57713526}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.03771913}\PY{p}{]}\PY{p}{,}
+                                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.36640429}\PY{p}{,}  \PY{l+m+mf}{1.19040075}\PY{p}{,}  \PY{l+m+mf}{0.24294858}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.81013248}\PY{p}{,}  \PY{l+m+mf}{3.3234273} \PY{p}{]}\PY{p}{,}
+                                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.07877717}\PY{p}{,}  \PY{l+m+mf}{0.24294858}\PY{p}{,}  \PY{l+m+mf}{0.05458379}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.39441812}\PY{p}{,}  \PY{l+m+mf}{0.69675323}\PY{p}{]}\PY{p}{,}
+                                              \PY{p}{[} \PY{l+m+mf}{0.57713526}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.81013248}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.39441812}\PY{p}{,}  \PY{l+m+mf}{2.87737592}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.14595728}\PY{p}{]}\PY{p}{,}
+                                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.03771913}\PY{p}{,}  \PY{l+m+mf}{3.3234273} \PY{p}{,}  \PY{l+m+mf}{0.69675323}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.14595728}\PY{p}{,}  \PY{l+m+mf}{9.34679459}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{vec\PYZus{}to\PYZus{}covariance}\PY{p}{(}\PY{n}{vec}\PY{p}{)}\PY{p}{:}
+             \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{m}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{vec}
+             \PY{n}{m}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{m}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{return} \PY{n}{m}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{X\PYZus{}decart}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} array([[ 2.04801284, -5.66614477],
+                [ 2.2371115 , -4.65981459],
+                [ 2.03447809, -6.63706426],
+                {\ldots},
+                [ 3.67299384, -5.25446356],
+                [ 3.17274135, -6.91549444],
+                [ 3.63251499, -6.39827699]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{true\PYZus{}parameters}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} \{'cov': array([[5. , 0.8],
+                 [0.8, 2. ]]), 'mean': array([ 2, -6])\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} -14197.47267742187
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,} 
+                              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+         \PY{n}{sgd\PYZus{}mse} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{sgd\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{sgd\PYZus{}kl} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{sgd\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{sgd\PYZus{}mle} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{sgd\PYZus{}mle}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{grad\PYZus{}mean\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{grad\PYZus{}cov\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X\PYZus{}decart}\PY{p}{:}
+                 \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}
+                 \PY{n}{grad\PYZus{}mean\PYZus{}total} \PY{o}{+}\PY{o}{=} \PY{n}{grad\PYZus{}mean} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{)}
+                 \PY{n}{grad\PYZus{}cov\PYZus{}total} \PY{o}{+}\PY{o}{=} \PY{n}{grad\PYZus{}cov} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{)}
+                 
+             \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{grad\PYZus{}mean\PYZus{}total}
+             \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{grad\PYZus{}cov\PYZus{}total}
+             
+             \PY{n}{sgd\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sgd\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sgd\PYZus{}mle}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|████████████████████████████████████████████████████████████████████████████████| 100/100 [00:14<00:00,  6.89it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mean [ 0.61464929 -1.9411575 ] [ 2 -6]
+cov [[ 2.01860148 -0.47490429]
+ [-0.47490429  3.25588709]] [[5.  0.8]
+ [0.8 2. ]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,} 
+                              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+         \PY{n}{nat\PYZus{}grad\PYZus{}mse} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{nat\PYZus{}grad\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{nat\PYZus{}grad\PYZus{}kl} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{nat\PYZus{}grad\PYZus{}mle} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{nat\PYZus{}grad\PYZus{}mle}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{grad\PYZus{}mean\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{grad\PYZus{}cov\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{grad}\PY{p}{,} \PY{n}{fisher} \PY{o}{=} \PY{n}{empirical\PYZus{}fisher}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{n}{parameters}\PY{o}{=}\PY{n}{parameters}\PY{p}{)}
+             \PY{n}{natural\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{fisher}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{grad}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} natural\PYZus{}grad = natural\PYZus{}grad / np.linalg.norm(natural\PYZus{}grad)}
+             
+             \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{natural\PYZus{}grad}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{vec\PYZus{}to\PYZus{}covariance}\PY{p}{(}\PY{n}{natural\PYZus{}grad}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+             
+             \PY{n}{nat\PYZus{}grad\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+             \PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{)}\PY{p}{)}
+             \PY{n}{nat\PYZus{}grad\PYZus{}mle}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}ll\PYZus{}array}\PY{p}{(}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+         
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100/100 [00:14<00:00,  5.89it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mean [ 1.23343751 -4.42502635] [ 2 -6]
+cov [[1.1108428  0.20947625]
+ [0.20947625 0.41273731]] [[5.  0.8]
+ [0.8 2. ]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nat\PYZus{}grad\PYZus{}mse}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Natural gradient}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sgd\PYZus{}mse}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SGD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE сравнение}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Natural gradient}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sgd\PYZus{}kl}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SGD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KL сравнение}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nat\PYZus{}grad\PYZus{}mle}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Natural gradient}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sgd\PYZus{}mle}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SGD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLE сравнение}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Дополнительное
+задание}\label{ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux43eux435-ux437ux430ux434ux430ux43dux438ux435}
+
+Выше мы считали матрицу Фишера эмпирическим путём. Это нормальный
+способ, если выборка большая или если интегрировать по плотности
+распределения сложно, к примеру, если плотность распределения задаётся
+нейронной сетью.
+
+Для нормального распределения матрицу Фишера не сложно посчитать
+аналитическим путём.
+
+Напишите свой код для аналитического расчёта матрицы Фишера в функции
+ниже(ничего кроме параметров распределения вам не понадобится).
+
+Запустите код и скажите что изменилось?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{analytical\PYZus{}fisher}\PY{p}{(}\PY{n}{parameters}\PY{p}{:} \PY{n+nb}{dict}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{Union}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{]}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Функция принимает на вход матрицу X размера N x 2, функцию расчёта градиента}
+         \PY{l+s+sd}{    для среднего и ковариации и параметры нормального распределения.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    На выход возвращается усреднённый по выборке градиент и матрица Фишнера.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{grads} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov} \PY{o}{=} \PY{n}{grad\PYZus{}func}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{parameters}\PY{p}{)}
+                 \PY{n}{grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{grad\PYZus{}mean}\PY{p}{,} \PY{n}{grad\PYZus{}cov}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{grads}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{grad}\PY{p}{)}
+             
+             
+             \PY{n}{fisher} \PY{o}{=} \PY{o}{\PYZlt{}}\PY{n}{YOUR} \PY{n}{CODE}\PY{o}{\PYZgt{}}
+             \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Where is Fisher, dude?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{n}{grads}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{fisher}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-17-4ca647a435d5>", line 16
+        fisher = <YOUR CODE>
+                 \^{}
+    SyntaxError: invalid syntax
+    
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,} 
+                             \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+        \PY{n}{nat\PYZus{}grad\PYZus{}mse} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{nat\PYZus{}grad\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{nat\PYZus{}grad\PYZus{}kl} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{grad\PYZus{}mean\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{grad\PYZus{}cov\PYZus{}total} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{grad}\PY{p}{,} \PY{n}{fisher} \PY{o}{=} \PY{n}{analytical\PYZus{}fisher}\PY{p}{(}\PY{n}{norm\PYZus{}2d\PYZus{}grad}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}decart}\PY{p}{,} \PY{n}{parameters}\PY{o}{=}\PY{n}{parameters}\PY{p}{)}
+            \PY{n}{natural\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{fisher}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{grad}\PY{p}{)}
+            
+            \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{natural\PYZus{}grad}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{parameters}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{lr} \PY{o}{*} \PY{n}{vec\PYZus{}to\PYZus{}covariance}\PY{p}{(}\PY{n}{natural\PYZus{}grad}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{nat\PYZus{}grad\PYZus{}mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse\PYZus{}difference}\PY{p}{(}\PY{n}{true\PYZus{}parameters}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+            \PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{kl\PYZus{}difference}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{true\PYZus{}parameters}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nat\PYZus{}grad\PYZus{}kl}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Natural gradient}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sgd\PYZus{}kl}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SGD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparison}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Wasserstein distance}\label{wasserstein-distance}
+
+Общая формула для расстояния Васерштейна:
+
+\[W_p(p, q) = \inf\limits_{\pi \in \Gamma(u, v)} \int\limits_{\mathbb{R} \times \mathbb{R}} d(x, y)^p d \pi(x, y)\]
+
+Но мы будем расматривать самый простой случай: 1D-растояние с \(p=1\).
+
+В таком случае формула упрощается до:
+
+\[W_1(p, q) = \inf\limits_{\pi \in \Gamma(u, v)}  \int\limits_{\mathbb{R} \times \mathbb{R}} |x - y| \pi(x, y)\]
+
+Физический смысл: как сделать наименьшее количество работы чтобы
+перенести лопатой землю из одной кучки в другую:
+
+\begin{figure}
+\centering
+\includegraphics{https://sbl.inria.fr/fig/Earth_mover_distance_logo.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{wasserstein\PYZus{}distance}
+         \PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k}{import} \PY{n}{permutations}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{def} \PY{n+nf}{wasserstein\PYZus{}distance\PYZus{}brute\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{n}{min\PYZus{}distance} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{inf}
+             \PY{n}{argmin\PYZus{}permutation} \PY{o}{=} \PY{k+kc}{None}
+             \PY{k}{for} \PY{n}{permutation} \PY{o+ow}{in} \PY{n}{permutations}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{distance} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{permutation}\PY{p}{)}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{min\PYZus{}distance} \PY{o}{\PYZgt{}} \PY{n}{distance}\PY{p}{:}
+                     \PY{n}{min\PYZus{}distance} \PY{o}{=} \PY{n}{distance}
+                     \PY{n}{argmin\PYZus{}permutation} \PY{o}{=} \PY{n}{permutation}
+             \PY{k}{return} \PY{n}{min\PYZus{}distance}
+         
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{wasserstein\PYZus{}distance\PYZus{}brute\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{wasserstein\PYZus{}distance}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{k}{def} \PY{n+nf}{wasserstein\PYZus{}distance\PYZus{}smart\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x\PYZus{}idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{y\PYZus{}idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             
+             \PY{n}{distance} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{y\PYZus{}idx}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{distance}
+         
+         \PY{n}{wasserstein\PYZus{}distance\PYZus{}brute\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o}{==} \PY{n}{wasserstein\PYZus{}distance\PYZus{}smart\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{n}{times\PYZus{}brute} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{times\PYZus{}smart} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Ns} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Ns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{wasserstein\PYZus{}distance\PYZus{}brute\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{times\PYZus{}brute}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t1} \PY{o}{\PYZhy{}} \PY{n}{t0}\PY{p}{)}
+             \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{wasserstein\PYZus{}distance\PYZus{}smart\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{times\PYZus{}smart}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t1} \PY{o}{\PYZhy{}} \PY{n}{t0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{times\PYZus{}brute}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brute force}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{times\PYZus{}smart}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smart force}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Сравнение двух функций по производительности}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N точек}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{секунды}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{100}
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{N}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{N}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{figure}
+         \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{output\PYZus{}notebook}\PY{p}{,} \PY{n}{push\PYZus{}notebook}\PY{p}{,} \PY{n}{show}
+         \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Arrow}\PY{p}{,} \PY{n}{OpenHead}\PY{p}{,} \PY{n}{NormalHead}\PY{p}{,} \PY{n}{VeeHead}
+         \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{CustomJS}\PY{p}{,} \PY{n}{Slider}
+         \PY{k+kn}{from} \PY{n+nn}{bokeh}\PY{n+nn}{.}\PY{n+nn}{layouts} \PY{k}{import} \PY{n}{row}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{gaussian\PYZus{}kde}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{wasserstein\PYZus{}distance}
+         \PY{k}{def} \PY{n+nf}{KL}\PY{p}{(}\PY{n}{P}\PY{p}{,} \PY{n}{Q}\PY{p}{)}\PY{p}{:}
+             \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.00001}
+         
+             \PY{n}{Pp} \PY{o}{=} \PY{n}{P}\PY{o}{+}\PY{n}{epsilon}
+             \PY{n}{Pp} \PY{o}{/}\PY{o}{=} \PY{n}{Pp}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{Qq} \PY{o}{=} \PY{n}{Q}\PY{o}{+}\PY{n}{epsilon}
+             \PY{n}{Qq} \PY{o}{/}\PY{o}{=} \PY{n}{Qq}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{divergence} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{Pp}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Pp}\PY{o}{/}\PY{n}{Qq}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{divergence}
+         
+         \PY{n}{output\PYZus{}notebook}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{bw} \PY{o}{=} \PY{l+m+mf}{0.1}
+         
+         \PY{n}{x\PYZus{}linspace} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{x\PYZus{}idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{y\PYZus{}idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{density\PYZus{}x} \PY{o}{=} \PY{n}{gaussian\PYZus{}kde}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{bw\PYZus{}method}\PY{o}{=}\PY{n}{bw}\PY{p}{)}
+         \PY{n}{density\PYZus{}y} \PY{o}{=} \PY{n}{gaussian\PYZus{}kde}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{bw\PYZus{}method}\PY{o}{=}\PY{n}{bw}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wasserstain distance=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, KL=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PY{n}{wasserstein\PYZus{}distance\PYZus{}smart\PYZus{}force}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{KL}\PY{p}{(}\PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{,}
+                                                                                                              \PY{n}{density\PYZus{}y}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{density\PYZus{}x\PYZus{}bokeh} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{,} \PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{density\PYZus{}y\PYZus{}bokeh} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{,} \PY{n}{density\PYZus{}y}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{arrow} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{density\PYZus{}y}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{update\PYZus{}plot}\PY{p}{(}\PY{n}{n\PYZus{}moved}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x\PYZus{}linspace} \PY{o}{=} \PY{n}{density\PYZus{}x\PYZus{}bokeh}\PY{o}{.}\PY{n}{data\PYZus{}source}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{k}{global} \PY{n}{density\PYZus{}x}
+             \PY{k}{global} \PY{n}{density\PYZus{}y}
+             \PY{n}{x\PYZus{}copy} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}moved}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x\PYZus{}copy}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{y\PYZus{}idx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+             \PY{n}{density\PYZus{}x} \PY{o}{=} \PY{n}{gaussian\PYZus{}kde}\PY{p}{(}\PY{n}{x\PYZus{}copy}\PY{p}{,} \PY{n}{bw\PYZus{}method}\PY{o}{=}\PY{n}{bw}\PY{p}{)}
+             \PY{n}{density\PYZus{}x\PYZus{}bokeh}\PY{o}{.}\PY{n}{data\PYZus{}source}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wasserstain distance=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, KL=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{wasserstein\PYZus{}distance\PYZus{}smart\PYZus{}force}\PY{p}{(}\PY{n}{x\PYZus{}copy}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{KL}\PY{p}{(}\PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{,}
+                                                                                                                      \PY{n}{density\PYZus{}y}\PY{p}{(}\PY{n}{x\PYZus{}linspace}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{arrow}\PY{o}{.}\PY{n}{data\PYZus{}source}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{y\PYZus{}idx}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}
+             \PY{n}{arrow}\PY{o}{.}\PY{n}{data\PYZus{}source}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{density\PYZus{}x}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{x\PYZus{}idx}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{density\PYZus{}y}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{y\PYZus{}idx}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         
+             \PY{n}{push\PYZus{}notebook}\PY{p}{(}\PY{n}{handle}\PY{o}{=}\PY{n}{bokeh\PYZus{}handle}\PY{p}{)}  
+\end{Verbatim}
+
+
+    
+    
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{callback} \PY{o}{=} \PY{n}{CustomJS}\PY{p}{(}\PY{n}{code}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{if (IPython.notebook.kernel !== undefined) }\PY{l+s+s2}{\PYZob{}}
+         \PY{l+s+s2}{    var kernel = IPython.notebook.kernel;}
+         \PY{l+s+s2}{    cmd = }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{update\PYZus{}plot(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ + cb\PYZus{}obj.value + }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{;}
+         \PY{l+s+s2}{    kernel.execute(cmd, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{);}
+         \PY{l+s+s2}{\PYZcb{}}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{slider} \PY{o}{=} \PY{n}{Slider}\PY{p}{(}\PY{n}{start}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} 
+                         \PY{n}{end}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}
+                         \PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                         \PY{n}{step}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                         \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moved dots}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                         \PY{n}{callback}\PY{o}{=}\PY{n}{callback}\PY{p}{)}
+         \PY{n}{bokeh\PYZus{}handle} \PY{o}{=} \PY{n}{show}\PY{p}{(}\PY{n}{row}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{slider}\PY{p}{)}\PY{p}{,} \PY{n}{notebook\PYZus{}handle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
